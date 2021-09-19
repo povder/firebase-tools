@@ -565,11 +565,13 @@ export async function startAll(
     const firestoreLogger = EmulatorLogger.forEmulator(Emulators.FIRESTORE);
     const firestoreAddr = legacyGetFirstAddr(Emulators.FIRESTORE);
     const websocketPort = legacyGetFirstAddr("firestore.websocket").port;
-
+    const functionsEmulator = options.config.src.emulators?.[Emulators.FIRESTORE]?.functions_emulator
+    
     const args: FirestoreEmulatorArgs = {
       host: firestoreAddr.host,
       port: firestoreAddr.port,
       websocket_port: websocketPort,
+      functions_emulator: functionsEmulator,
       project_id: projectId,
       auto_download: true,
     };
